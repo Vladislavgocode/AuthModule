@@ -1,6 +1,8 @@
 "# AuthModule" 
 
 
+"# Памятка БД ПРОГЕРА" 
+
 CREATE TABLE user (
     id   INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT
