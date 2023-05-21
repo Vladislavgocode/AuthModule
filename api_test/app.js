@@ -102,12 +102,12 @@ app.get(`/reg/:login/:password` , async function(request, response){
   var re2 = /^[a-zA-Z\-]+$/;
   let check_password = re.test(password);
   let nameRegex = re2.test(login);
-  const project = await User.findOne({ where: { login: login } });
+  const project = await User.findOne({ where: { login: login , password : password } });
   if (password === "" || login == "" || check_password === false || nameRegex === false){
     status = {status: "Введено недопустимое значение"}
   }
   if (project === null) {
-      await User.create({login:request.params.login,password:password,token:token}).then(
+      await User.create({login:login,password:password,token:token}).then(
       status = {status : "Пользователь создан"},
       localStorage.setItem('user', login)
   )
@@ -121,7 +121,8 @@ app.post(`/login` , async function(request, response){
   let status = ""
   const { login , password } = request.body;
 
-  const user = await User.findOne({ where: { login: login , password: password} })
+  const user = await User.findOne({ where: { login: login , password: toHex(password)} })
+  console.log(user)
   if (user == null){
         status = {status : "Данного пользователя не существует"}
   }
@@ -134,7 +135,7 @@ app.post(`/login` , async function(request, response){
 
 app.post(`/userfind` , async function(request, response){
   const { login , password } = request.body;
-  const user = await User.findOne({ where: { login: login , password : password} })
+  const user = await User.findOne({ where: { login: login , password : toHex(password)} })
   if (user!=null){
     let user_info = {username:user.login,token:user.token}
     response.send(user_info)

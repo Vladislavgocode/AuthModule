@@ -46,6 +46,7 @@ export default {
     async reg(){
         const data = await fetch(`http://localhost:3001/reg/${this.field_login}/${this.field_password}`)
         let response = await data.json()
+        console.log(response["status"])
         this.field_login = ""
         this.field_password = ""
   },

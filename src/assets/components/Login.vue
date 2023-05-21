@@ -93,10 +93,12 @@ export default {
           const response2 = await data2.json()
           this.store.user.push(response2)
         }
-        this.store.navigations4[0].items = [
+        const username = this.store.user?.[0]?.username;
+        if (username) {
+          this.store.navigations4[0].items = [
                     {
                       link_name: "/",
-                      show_name: `Привет ${this.store.user[0].username} !`,
+                      show_name: `Привет ${username} !`,
                       icon: "ProfileIcon",
                     },
                     {
@@ -104,7 +106,11 @@ export default {
                       show_name: `Выйти`,
                       icon: "LogoutIcon",
                     },
-                  ],
+          ]
+        } else {
+          // Обработка случая, когда this.store.user пуст или не существует
+          console.log('Username is empty.');
+        }
         this.field_login = ""
         this.field_password = ""
 }

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="store.allTest">
+    <div>
         <p class="card__header">Главная</p>
         <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-cols-3 gap-2">
         </div>
