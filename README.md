@@ -1,1 +1,1 @@
-"# AuthModule"
+"# vue.js AuthModule"
